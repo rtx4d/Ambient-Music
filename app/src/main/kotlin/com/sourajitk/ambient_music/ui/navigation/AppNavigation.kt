@@ -1,10 +1,12 @@
 package com.sourajitk.ambient_music.ui.navigation
 
+import android.content.Intent
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -16,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -25,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sourajitk.ambient_music.R
+import com.sourajitk.ambient_music.playback.MusicPlaybackService
 import com.sourajitk.ambient_music.ui.home.HomeScreen
 import com.sourajitk.ambient_music.ui.settings.SettingsScreen
 
@@ -40,6 +44,7 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
 fun MainAppNavigation() {
   val navController = rememberNavController()
   val navItems = listOf(Screen.Home, Screen.Settings)
+  val context = LocalContext.current
 
   // Get the current navigation back stack entry
   val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -71,6 +76,23 @@ fun MainAppNavigation() {
           )
         }
       }
+    },
+    floatingActionButton = {
+      val QuickActionss =
+        listOf(
+          QuickActions(
+            icon = Icons.Default.Stop,
+            label = "Stop Playback",
+            onAction = {
+              val intent =
+                Intent(context, MusicPlaybackService::class.java).apply {
+                  action = MusicPlaybackService.ACTION_STOP_SERVICE
+                }
+              context.startForegroundService(intent)
+            },
+          )
+        )
+      FloatingToolbarCompose(onFabClick = {}, items = QuickActionss)
     },
   ) { innerPadding ->
     NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
