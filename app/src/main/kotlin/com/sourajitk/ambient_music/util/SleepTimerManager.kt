@@ -30,10 +30,7 @@ object SleepTimerManager {
       object : CountDownTimer(durationInMillis, 1000) {
           override fun onTick(millisUntilFinished: Long) {
             // Broadcast the remaining time
-            val updateIntent =
-              Intent(MusicPlaybackService.ACTION_TIMER_TICK).apply {
-                putExtra(MusicPlaybackService.EXTRA_TIME_REMAINING_MS, millisUntilFinished)
-              }
+            val updateIntent = null
             context.sendBroadcast(updateIntent)
           }
 
@@ -62,10 +59,7 @@ object SleepTimerManager {
     sleepTimerMinutes = 0
 
     // Send a final broadcast to clear the UI countdown text
-    val cancelIntent =
-      Intent(MusicPlaybackService.ACTION_TIMER_TICK).apply {
-        putExtra(MusicPlaybackService.EXTRA_TIME_REMAINING_MS, 0L)
-      }
+    val cancelIntent = null
     context.sendBroadcast(cancelIntent)
 
     TileStateUtil.requestTileUpdate(context)

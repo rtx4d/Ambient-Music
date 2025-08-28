@@ -52,12 +52,12 @@ class SleepTimerTileService : TileService() {
     Log.d(TAG, "onClick: Calculated next index: $nextIndex, next value: $nextTimerValue minutes.")
 
     // The intent to the service is still correct
-    val intent =
-      Intent(this, MusicPlaybackService::class.java).apply {
-        action = MusicPlaybackService.ACTION_SET_SLEEP_TIMER
-        putExtra(MusicPlaybackService.EXTRA_TIMER_DURATION_MINUTES, nextTimerValue)
-      }
-    startService(intent)
+//    val intent =
+//      Intent(this, MusicPlaybackService::class.java).apply {
+//        action = MusicPlaybackService.ACTION_SET_SLEEP_TIMER
+//        putExtra(MusicPlaybackService.EXTRA_TIMER_DURATION_MINUTES, nextTimerValue)
+//      }
+    //startService(intent)
     Log.d(
       TAG,
       "onClick: Sent Intent to MusicPlaybackService with action SET_SLEEP_TIMER and value $nextTimerValue.",
