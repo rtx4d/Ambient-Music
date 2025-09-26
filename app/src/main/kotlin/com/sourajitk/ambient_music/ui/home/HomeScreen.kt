@@ -83,7 +83,6 @@ fun HomeScreen(windowSizeClass: WindowSizeClass) {
         )
         Spacer(modifier = Modifier.height(32.dp))
       }
-
       item {
         Text(
           text = stringResource(R.string.minimal_activity_info),

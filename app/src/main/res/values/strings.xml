@@ -59,4 +59,7 @@
     <string name="update_available_title">Update Available</string>
     <string name="update_available_subtitle">A new version is ready to install.</string>
     <string name="update_notification_body_github">Version %1$s is now available on GitHub. Tap to open the GitHub Release page.</string>
+    <string name="timer_string">Sleep Timer</string>
+    <string name="timer_tile_add_helper">Sleep Timer will turn off music when you fall
+        asleep.</string>
 </resources>

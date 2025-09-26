@@ -43,6 +43,10 @@ class SleepQSTileService : TileService() {
     if (SongsRepo.songs.isEmpty()) {
       Log.w(TAG, "No songs in parsed JSON")
       updateTileVisualsBasedOnServiceState(forceUnavailable = false)
+      // After refresh attempt, update all tiles so they reflect the new state.
+      SongsRepo.initializeAndRefresh(applicationContext) { success, statusMessage ->
+        TileStateUtil.requestTileUpdate(applicationContext)
+      }
       return
     }
     val isPlaying = MusicPlaybackService.isServiceCurrentlyPlaying
